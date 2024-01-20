@@ -7,6 +7,7 @@ class ModelName(str, Enum):
     alexnet = "alexnet"
     resnet = "resnet"
     lenet = "lenet"
+    my_model = "my_model"
 
 
 app = FastAPI()
@@ -19,6 +20,11 @@ async def root():
 
 @app.get("/models/{model_name}")
 async def get_model(model_name: ModelName):
+    """
+    Выбери название модели
+    :param model_name: название модели
+    :return: словарь
+    """
     if model_name is ModelName.alexnet:
         return {"model_name": model_name, "message": "Deep Learning FTW!"}
 
