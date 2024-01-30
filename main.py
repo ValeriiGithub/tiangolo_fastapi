@@ -29,6 +29,7 @@ async def get_model(model_name: ModelName):
         return {"model_name": model_name, "message": "Deep Learning FTW!"}
 
     if model_name.value == "lenet":
+        # Значение "lenet" также можно получить с помощью ModelName.lenet.value.
         return {"model_name": model_name, "message": "LeCNN all the images"}
 
     return {"model_name": model_name, "message": "Have some residuals"}
@@ -42,3 +43,11 @@ async def read_user_me():
 @app.get("/items/{item_id}")
 async def read_item(item_id: int):
     return {"item_id": item_id}
+
+
+# Path-параметры
+# Конвертер пути
+@app.get("/files/{file_path:path}")
+async def read_file(file_path: str):
+    return {"file_path": file_path}
+
