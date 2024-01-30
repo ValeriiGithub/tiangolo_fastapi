@@ -1,3 +1,7 @@
+"""
+Query-параметры представляют из себя набор пар ключ-значение, которые идут после знака ? в URL-адресе, разделенные символами &
+"""
+
 from __future__ import annotations
 from typing import Union
 from fastapi import FastAPI
@@ -49,4 +53,11 @@ async def read_user_item(
         item.update(
             {"description": "This is an amazing item that has a long description"}
         )
+    return item
+
+
+# Обязательные query-параметры
+@app.get("/required_items/{item_id}")
+async def read_user_item(item_id: str, needy: str):
+    item = {"item_id": item_id, "needy": needy}
     return item
