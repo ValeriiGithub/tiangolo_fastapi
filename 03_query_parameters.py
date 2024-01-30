@@ -61,3 +61,21 @@ async def read_user_item(
 async def read_user_item(item_id: str, needy: str):
     item = {"item_id": item_id, "needy": needy}
     return item
+
+
+@app.get("/required_items_2/{item_id}")
+async def read_user_item(
+    item_id: str, needy: str, skip: int = 0, limit: Union[int, None] = None
+):
+    """
+    Конечно, вы можете определить некоторые параметры как обязательные,
+    некоторые - со значением по умполчанию,
+    а некоторые - полностью необязательные:
+    :param item_id:
+    :param needy:
+    :param skip:
+    :param limit:
+    :return:
+    """
+    item = {"item_id": item_id, "needy": needy, "skip": skip, "limit": limit}
+    return item
