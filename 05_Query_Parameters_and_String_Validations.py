@@ -55,3 +55,10 @@ async def read_items(
         results.update({"q": q})
     return results
 
+# Псевдонимы параметров
+@app.get("/items_6/")
+async def read_items(q: Annotated[Union[str, None], Query(alias="item-query")] = None):
+    results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
+    if q:
+        results.update({"q": q})
+    return results
