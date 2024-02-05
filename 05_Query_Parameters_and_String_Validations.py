@@ -84,3 +84,16 @@ async def read_items(
     if q:
         results.update({"q": q})
     return results
+
+# Исключить из OpenAPI¶
+#
+# Чтобы исключить query-параметр из генерируемой OpenAPI схемы (а также из системы автоматической генерации документации),
+# укажите в Query параметр include_in_schema=False:
+@app.get("/Exclude_from_OpenAPI/")
+async def read_items(
+    hidden_query: Annotated[Union[str, None], Query(include_in_schema=False)] = None
+):
+    if hidden_query:
+        return {"hidden_query": hidden_query}
+    else:
+        return {"hidden_query": "Not found"}
