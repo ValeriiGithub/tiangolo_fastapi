@@ -5,7 +5,13 @@ from typing_extensions import Annotated
 
 app = FastAPI()
 
-
+# Import Query and Annotated
+@app.get("/items_Query_and_Annotated/")
+async def read_items(q: Annotated[Union[str, None], Query(max_length=50)] = None):
+    results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
+    if q:
+        results.update({"q": q})
+        
 @app.get("/items/")
 async def read_items(q: Annotated[str, Query(min_length=3)]):
     results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
