@@ -22,6 +22,18 @@ async def read_items(
         results.update({"q": q})
     return results
 
+# Add regular expressions
+@app.get("/items_regular_expressions/")
+async def read_items(
+    q: Annotated[
+        Union[str, None], Query(min_length=3, max_length=50, pattern="^fixedquery$")
+    ] = None,
+):
+    results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
+    if q:
+        results.update({"q": q})
+    return results
+
 @app.get("/items/")
 async def read_items(q: Annotated[str, Query(min_length=3)]):
     results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
